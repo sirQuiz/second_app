@@ -58,7 +58,10 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                     },
                   );
                 },
-              )
+              ),
+              const SizedBox(
+                height: 25,
+              ),
             ],
           ),
         ),
