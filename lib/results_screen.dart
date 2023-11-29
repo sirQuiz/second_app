@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:second_app/quiz.dart';
 import 'package:second_app/date/questions.dart';
+import 'package:second_app/result_answers.dart';
 
 class ResultsScreen extends StatelessWidget {
   const ResultsScreen({
@@ -27,7 +29,13 @@ class ResultsScreen extends StatelessWidget {
   }
 
   @override
-  Widget build(context) {
+  Widget build(BuildContext context) {
+    final summaryData            = getSummaryData();
+    final totalQuestionsAmount   = questions.length;
+    final correctQuestionsAmount = summaryData.where((data) {
+      return data['user_answer'] == data['correct_answer'];
+    }).length;
+
     return Center(
       child: SizedBox(
         width: double.infinity,
@@ -36,16 +44,18 @@ class ResultsScreen extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Text('You asnwered X out of Y questions correctly!'),
+              Text('You asnwered $correctQuestionsAmount out of $totalQuestionsAmount questions correctly!'),
               const SizedBox(
                 height: 25,
               ),
-              const Text('You asnwered X out of Y questions correctly!'),
+              ResultAnswers(summaryData),
               const SizedBox(
                 height: 25,
               ),
               TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  
+                },
                 child: const Text('Restart Quiz!'),
               ),
             ],
